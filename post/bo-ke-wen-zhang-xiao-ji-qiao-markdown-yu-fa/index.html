@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>博客文章小技巧—Markdown语法 | 小红的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1642738643847">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="介绍一些常用的markdown语法
+
+参考文章1
+参考文章2
+一、标题
+#+空格+标题-&gt;一级标题
+##+空格+标题-&gt;二级标题
+###+空格+标题-&gt;三级标题
+以此类推，Gridea支持四级标题。
+效果如下
+一级标题
+二..." />
+    <meta name="keywords" content="blog,Gridea" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://localhost:4000">
+        <img src="http://localhost:4000/images/avatar.png?v=1642738643847" class="site-logo">
+        <h1 class="site-title">小红的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      愿星河徜徉，一路有光
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">博客文章小技巧—Markdown语法</h2>
+            <div class="post-date">2021-12-12</div>
+            
+              <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/bo-ke-wen-zhang-xiao-ji-qiao-markdown-yu-fa.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p><strong>介绍一些常用的markdown语法</strong></p>
+<!-- more -->
+<p><a href="https://blog.csdn.net/qcx321/article/details/53780672">参考文章1</a><br>
+<a href="https://blog.csdn.net/u014061630/article/details/81359144">参考文章2</a></p>
+<h1 id="一-标题">一、标题</h1>
+<p>#+空格+标题-&gt;一级标题<br>
+##+空格+标题-&gt;二级标题<br>
+###+空格+标题-&gt;三级标题<br>
+以此类推，Gridea支持四级标题。</p>
+<p>效果如下</p>
+<h1 id="一级标题">一级标题</h1>
+<h2 id="二级标题">二级标题</h2>
+<h3 id="三级标题">三级标题</h3>
+<h4 id="四级标题">四级标题</h4>
+<hr>
+<h1 id="二-字体">二、字体</h1>
+<ol>
+<li>加粗-&gt; 需要加粗的部分前后各加两个*号</li>
+<li>倾斜-&gt; 需要倾斜的部分前后各加一个*号</li>
+<li>倾斜加粗-&gt; 需要倾斜加粗的部分前后各加三个*号</li>
+<li>删除线-&gt;  需要加删除线的部分前后各加两个~~号<br>
+效果如下<br>
+<strong>这是加粗的文字</strong><br>
+<em>这是倾斜的文字</em>`<br>
+<em><strong>这是斜体加粗的文字</strong></em><br>
+<s>这是加删除线的文字</s></li>
+</ol>
+<hr>
+<h2 id="字体-字号与字体颜色字体背景颜色">字体、字号与字体颜色，字体背景颜色</h2>
+<p>markdown本身是不支持修改字体、字号与颜色等功能的，要使用内嵌HTML的方法来实现</p>
+<pre><code>字体改变： &lt;font face=&quot;这里填字体&quot;&gt;填内容&lt;/font&gt;
+颜色改变： &lt;font color=这里填颜色&gt;填内容&lt;/font&gt;
+尺寸改变： &lt;font size=这里填字体大小（数字）&gt;填内容&lt;/font&gt;
+总体应用：&lt;font face=&quot;字体&quot; color=颜色 size=大小&gt;填内容&lt;/font&gt;
+</code></pre>
+<p>效果如下<br>
+<code>&lt;font face=&quot;黑体&quot;&gt;我是黑体字&lt;/font&gt;</code><br>
+<font face="黑体">我是黑体字</font><br>
+<code>&lt;font face=&quot;微软雅黑&quot;&gt;我是微软雅黑&lt;/font&gt;</code><br>
+<font face="微软雅黑">我是微软雅黑</font><br>
+<code>&lt;font face=&quot;STCAIYUN&quot;&gt;我是华文彩云&lt;/font&gt;</code><br>
+<font face="STCAIYUN">我是华文彩云</font><br>
+<code>&lt;font color=red&gt;我是红色&lt;/font&gt;</code><br>
+<font color=red>我是红色</font><br>
+<code>&lt;font color=#008000&gt;我是绿色&lt;/font&gt;</code><br>
+<font color=#008000>我是绿色</font><br>
+<code>&lt;font color=Blue&gt;我是蓝色&lt;/font&gt;</code><br>
+<font color=Blue>我是蓝色</font><br>
+<code>&lt;font size=5&gt;我是尺寸&lt;/font&gt;</code><br>
+<font size=5>我是尺寸</font><br>
+<code>&lt;font face=&quot;黑体&quot; color=green size=5&gt;我是黑体，绿色，尺寸为5&lt;/font&gt;</code><br>
+<font face="黑体" color=green size=5>我是黑体，绿色，尺寸为5</font></p>
+<hr>
+<h1 id="三-分隔符">三、分隔符</h1>
+<p>使用三个或以上的 - 或者 * 表示，且这一行只有符号<br>
+效果如上</p>
+<h1 id="四-引用">四、引用</h1>
+<pre><code>&gt;引用
+ &gt;&gt;引用中的引用
+</code></pre>
+<p>效果如下</p>
+<blockquote>
+<p>引用</p>
+<blockquote>
+<p>引用中的引用</p>
+</blockquote>
+</blockquote>
+<h1 id="五-超链接">五、超链接</h1>
+<p><code>[超链接名](超链接地址 &quot;超链接title&quot;)</code><br>
+title可加可不加<br>
+效果如下<br>
+百度的超链接<code>[百度](http://baidu.com)</code><br>
+<a href="http://baidu.com">百度</a></p>
+<h1 id="六-列表">六、列表</h1>
+<h2 id="有序列表">有序列表</h2>
+<p>数字加点<br>
+1+.+空格+列表内容<br>
+2+.+空格+列表内容<br>
+效果如下</p>
+<ol>
+<li>列表内容</li>
+<li>列表内容</li>
+<li>列表内容</li>
+</ol>
+<!-- more -->
+<h2 id="无序列表">无序列表</h2>
+<p>无序列表用 - + * 任何一种都可以<br>
+-+空格+列表内容<br>
+++空格+ 列表内容<br>
+*+空格+ 列表内容<br>
+效果如下</p>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<h1 id="七-代码">七、代码</h1>
+<p>单行代码：代码之间分别用一个反引号包起来<br>
+<code>代码内容</code><br>
+代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+<pre><code>  代码...
+  代码...
+  代码...
+</code></pre>
+<h1 id="八-表格">八、表格</h1>
+<pre><code> 表头|表头|表头
+---|:--:|---:
+内容|内容|内容
+内容|内容|内容
+
+第二行分割表头和内容。
+- 有一个就行，为了对齐，多加了几个
+文字默认居左
+-两边加：表示文字居中
+-右边加：表示文字居右
+注：原生的语法两边都要用 | 包起来。此处省略
+</code></pre>
+<p>效果如下</p>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th style="text-align:center">班级</th>
+<th style="text-align:right">排行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小米</td>
+<td style="text-align:center">1班</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>小明</td>
+<td style="text-align:center">2班</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td>小敏</td>
+<td style="text-align:center">3班</td>
+<td style="text-align:right">3</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://localhost:4000/tag/JKRd5bouk/" class="tag">
+                    blog
+                  </a>
+                
+                  <a href="http://localhost:4000/tag/ups0oo9tH/" class="tag">
+                    Gridea
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://localhost:4000/post/hello-gridea/">
+                  <h3 class="post-title">
+                    超简单博客搭建！
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

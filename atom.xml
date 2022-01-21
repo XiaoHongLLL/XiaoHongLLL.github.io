@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://localhost:4000</id>
+    <title>小红的博客</title>
+    <updated>2022-01-21T04:21:28.352Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="http://localhost:4000"/>
+    <link rel="self" href="http://localhost:4000/atom.xml"/>
+    <subtitle>愿星河徜徉，一路有光</subtitle>
+    <logo>http://localhost:4000/images/avatar.png</logo>
+    <icon>http://localhost:4000/favicon.ico</icon>
+    <rights>All rights reserved 2022, 小红的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[备战蓝桥杯笔记（九）—前缀和（二）]]></title>
+        <id>http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-jiu-qian-zhui-he-er/</id>
+        <link href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-jiu-qian-zhui-he-er/">
+        </link>
+        <updated>2022-01-20T16:08:27.000Z</updated>
+        <summary type="html"><![CDATA[<p>✨<strong>一些个前缀和进阶应用</strong>✨</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>✨<strong>一些个前缀和进阶应用</strong>✨</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[备战蓝桥杯笔记（八）—前缀和（一）]]></title>
+        <id>http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-ba-qian-zhui-he-yi/</id>
+        <link href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-ba-qian-zhui-he-yi/">
+        </link>
+        <updated>2022-01-20T09:01:52.000Z</updated>
+        <summary type="html"><![CDATA[<p><strong>介绍前缀和的模板，原理以及应用</strong></p>
+]]></summary>
+        <content type="html"><![CDATA[<p><strong>介绍前缀和的模板，原理以及应用</strong></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[备战蓝桥杯笔记（七）—二分（二）]]></title>
+        <id>http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-qi-er-fen-er/</id>
+        <link href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-qi-er-fen-er/">
+        </link>
+        <updated>2022-01-18T16:34:12.000Z</updated>
+        <summary type="html"><![CDATA[<p>一个简单的例题</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>一个简单的例题</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[备战蓝桥杯笔记（六）—二分（一）]]></title>
+        <id>http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-liu-er-fen/</id>
+        <link href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-liu-er-fen/">
+        </link>
+        <updated>2021-12-29T11:41:22.000Z</updated>
+        <summary type="html"><![CDATA[<p><strong>介绍二分的模板以及如何运用</strong></p>
+]]></summary>
+        <content type="html"><![CDATA[<p><strong>介绍二分的模板以及如何运用</strong></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[备战蓝桥杯笔记（五）—递推（二）]]></title>
+        <id>http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-si-di-tui-er/</id>
+        <link href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-si-di-tui-er/">
+        </link>
+        <updated>2021-12-21T12:09:48.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[备战蓝桥杯笔记（四）—递推（一）]]></title>
+        <id>http://localhost:4000/post/bei-zhan-lan-qiao-bi-ji-san-di-tui-yi/</id>
+        <link href="http://localhost:4000/post/bei-zhan-lan-qiao-bi-ji-san-di-tui-yi/">
+        </link>
+        <updated>2021-12-20T03:30:39.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[备战蓝桥杯笔记（三）—递归（二）]]></title>
+        <id>http://localhost:4000/post/bei-zhan-lan-qiao-bi-ji-di-gui-er/</id>
+        <link href="http://localhost:4000/post/bei-zhan-lan-qiao-bi-ji-di-gui-er/">
+        </link>
+        <updated>2021-12-19T15:48:21.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[备战蓝桥杯笔记（二）——递归（一）]]></title>
+        <id>http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-er-di-gui/</id>
+        <link href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-er-di-gui/">
+        </link>
+        <updated>2021-12-15T09:18:51.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[备战蓝桥笔记（一）——时间复杂度]]></title>
+        <id>http://localhost:4000/post/bei-zhan-lan-qiao-bi-ji-yi/</id>
+        <link href="http://localhost:4000/post/bei-zhan-lan-qiao-bi-ji-yi/">
+        </link>
+        <updated>2021-12-15T08:41:04.000Z</updated>
+        <summary type="html"><![CDATA[<p><strong>根据题目给定的数据范围反推时间复杂度和算法</strong></p>
+]]></summary>
+        <content type="html"><![CDATA[<p><strong>根据题目给定的数据范围反推时间复杂度和算法</strong></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[博客文章小技巧—Markdown语法]]></title>
+        <id>http://localhost:4000/post/bo-ke-wen-zhang-xiao-ji-qiao-markdown-yu-fa/</id>
+        <link href="http://localhost:4000/post/bo-ke-wen-zhang-xiao-ji-qiao-markdown-yu-fa/">
+        </link>
+        <updated>2021-12-12T09:44:05.000Z</updated>
+        <summary type="html"><![CDATA[<p><strong>介绍一些常用的markdown语法</strong></p>
+]]></summary>
+        <content type="html"><![CDATA[<p><strong>介绍一些常用的markdown语法</strong></p>
+]]></content>
+    </entry>
+</feed>

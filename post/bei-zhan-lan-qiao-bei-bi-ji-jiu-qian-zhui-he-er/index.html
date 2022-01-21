@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>备战蓝桥杯笔记（九）—前缀和（二） | 小红的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1642738643847">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="✨一些个前缀和进阶应用✨
+
+激光炸弹
+👍HNOI2003👍
+原题链接
+题意：
+地图上有 N 个目标，用整数  Xi, Yi 表示目标在地图上的位置，每个目标都有一个价值 Wi。
+一颗炸弹可以摧毁R*R个位置的所有目标
+求最多能炸掉总价值..." />
+    <meta name="keywords" content="前缀和,蓝桥杯" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://localhost:4000">
+        <img src="http://localhost:4000/images/avatar.png?v=1642738643847" class="site-logo">
+        <h1 class="site-title">小红的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      愿星河徜徉，一路有光
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">备战蓝桥杯笔记（九）—前缀和（二）</h2>
+            <div class="post-date">2022-01-21</div>
+            
+              <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/bei-zhan-lan-qiao-bei-bi-ji-jiu-qian-zhui-he-er.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p>✨<strong>一些个前缀和进阶应用</strong>✨</p>
+<!-- more -->
+<h1 id="激光炸弹">激光炸弹</h1>
+<p><strong>👍HNOI2003👍</strong><br>
+<a href="https://www.acwing.com/problem/content/101/">原题链接</a><br>
+<strong>题意：</strong><br>
+地图上有 N 个目标，用整数  Xi, Yi 表示目标在地图上的位置，每个目标都有一个价值 Wi。<br>
+一颗炸弹可以摧毁R*R个位置的所有目标<br>
+求最多能炸掉总价值为多少的目标</p>
+<h2 id="数据范围">数据范围</h2>
+<blockquote>
+<p>0≤R≤109<br>
+0&lt;N≤10000,<br>
+0≤Xi,Yi≤5000<br>
+0≤Wi≤1000</p>
+</blockquote>
+<h2 id="样例">样例</h2>
+<p>输入：</p>
+<blockquote>
+<p>2 1<br>
+0 0 1<br>
+1 1 1</p>
+</blockquote>
+<p>输出：<br>
+<font color=red size=5>1</font></p>
+<p><strong><font size=4>思路</font></strong><br>
+<font color=blue size=3>1. 先求出输入数据的前缀和</font><br>
+<font color=blue size=3>2. 然后枚举每种以R为边长的正方形的可能情况</font><br>
+<font color=blue size=3>3. 即左下角为（i,j）,R为边长的正方形的可能情况</font><br>
+<font color=blue size=3>4.由于题目限制，</font><br>
+<strong><font size=4>推导一下左下角为（i,j）,R为边长的正方形的矩阵前缀和</font></strong><br>
+<img src="http://localhost:4000/post-images/1642732229644.png" alt="" loading="lazy"></p>
+<h1 id="代码">代码</h1>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,r,s[5010][5010],a[5010][5010];
+int main()
+{
+	scanf(&quot;%d %d&quot;,&amp;n,&amp;r);
+	int x,y,w;
+    r = min(5001, r); //r可能比最大范围的矩阵范围大
+	for(int i = 0;i &lt; n ; i++ )
+	{
+		scanf(&quot;%d %d %d&quot;,&amp;x,&amp;y,&amp;w);
+		x++;y++;
+		s[x][y] += w;	
+	}
+	//计算二维前缀和 
+	for(int i = 1 ; i &lt;= 5001 ;i++) 
+		for(int j = 1 ;j &lt;= 5001 ;j++)
+			{
+				s[i][j] += s[i-1][j] + s[i][j-1] -s[i-1][j-1];
+			} 
+	//枚举以 r 为边长的正方形的每种情况，
+	//正方形的右下角坐标为（i，j）		
+	int ans = 0;
+    for (int i = r; i &lt;= 5001; i++) 
+	{
+        for (int j = r; j &lt;= 5001; j++) 
+		{
+			//得到最大的值 
+            ans = max(ans, s[i][j] - s[i - r][j] - s[i][j - r] + s[i - r][j - r]);
+        }
+    }
+    printf(&quot;%d\n&quot;,ans);
+}
+
+</code></pre>
+<h1 id="k倍区间">K倍区间</h1>
+<p><strong>👍2017蓝桥杯B组👍</strong><br>
+<a href="https://www.acwing.com/problem/content/1232/">原题链接</a><br>
+<strong>题意：</strong><br>
+给定一个长度为 N 的数列，A1,A2,…AN，如果其中一段连续的子序列 Ai,Ai+1,…Aj 之和是 K 的倍数，我们就称这个区间 [i,j] 是 K 倍区间。<br>
+求有多少个K倍区间</p>
+<h2 id="数据范围-2">数据范围</h2>
+<blockquote>
+<p>1≤N,K≤100000 ,<br>
+1≤Ai≤100000</p>
+</blockquote>
+<h2 id="样例-2">样例</h2>
+<p>输入：</p>
+<blockquote>
+<p>5 2<br>
+1<br>
+2<br>
+3<br>
+4<br>
+5</p>
+</blockquote>
+<p>输出：<br>
+<font color=red size=5>6</font></p>
+<p><strong><font size=4>思路</font></strong><br>
+<font color=blue size=3>1. 由数据范围可以确定为时间复杂度不能为O(n^2)</font><br>
+<font color=blue size=3>2.由一维前缀和公式：S[l][r] = S[r]-S[l-1]以及题意可知 </font><br>
+<font color=blue size=3>遍历r,统计出[1][r-1]区间里前缀和%k的值相等的个数 </font><br>
+<font color=blue size=3>3.最后再加上%k等于0的个数即可 </font></p>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+# define N 100005
+using namespace std;
+int n,k,x,cnt[N],s[N],a[N];
+int main()
+{
+	scanf(&quot;%d %d&quot;,&amp;n,&amp;k);
+	long long ans=0;	
+	for(int i = 1 ; i &lt;= n ; i++ )
+		{	scanf(&quot;%d&quot;,&amp;a[i]);
+			s[i]=(s[i-1]+a[i])%k;//转换成被取模之后
+			 ans+=cnt[s[i]];//加上余数相等的前缀和
+			 cnt[s[i]]++;//统计余数次数 
+			 
+		}
+		
+			
+	printf(&quot;%lld\n&quot;,ans+cnt[0]);			 
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://localhost:4000/tag/AaSpkgH2r/" class="tag">
+                    前缀和
+                  </a>
+                
+                  <a href="http://localhost:4000/tag/wA1FtrrQY/" class="tag">
+                    蓝桥杯
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-ba-qian-zhui-he-yi/">
+                  <h3 class="post-title">
+                    备战蓝桥杯笔记（八）—前缀和（一）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

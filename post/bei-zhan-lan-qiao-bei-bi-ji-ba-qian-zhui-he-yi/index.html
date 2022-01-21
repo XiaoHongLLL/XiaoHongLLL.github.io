@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>备战蓝桥杯笔记（八）—前缀和（一） | 小红的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1642738643847">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="介绍前缀和的模板，原理以及应用
+
+模板
+1. 一维前缀和
+S[i] = a[1] + a[2] + ... a[i]
+[l,r]区间的和 ，即（a[l] + ... + a[r]） = S[r] - S[l - 1];
+2. 二维前缀和
+S..." />
+    <meta name="keywords" content="前缀和,蓝桥杯" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://localhost:4000">
+        <img src="http://localhost:4000/images/avatar.png?v=1642738643847" class="site-logo">
+        <h1 class="site-title">小红的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      愿星河徜徉，一路有光
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">备战蓝桥杯笔记（八）—前缀和（一）</h2>
+            <div class="post-date">2022-01-20</div>
+            
+              <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/bei-zhan-lan-qiao-bei-bi-ji-ba-qian-zhui-he-yi.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p><strong>介绍前缀和的模板，原理以及应用</strong></p>
+<!-- more -->
+<h1 id="模板">模板</h1>
+<h2 id="1-一维前缀和">1. 一维前缀和</h2>
+<p>S[i] = a[1] + a[2] + ... a[i]<br>
+[l,r]区间的和 ，即（a[l] + ... + a[r]） = <font size=5 color=blue >S[r] - S[l - 1];</font></p>
+<h2 id="2-二维前缀和">2. 二维前缀和</h2>
+<p>S[i][ j] = 第i行j列格子左上部分所有元素的和<br>
+<font size=5 color=red >S[i][j]=S[i-1][j]+S[i][j-1]+a[i][j]-S[i-1][j-1];</font></p>
+<p><img src="http://localhost:4000/post-images/1642689334026.png" alt="" loading="lazy"><br>
+以<font size=5> (x1,y1) </font>为左上角，<font size=5> (x2,y2) </font>为右下角的子矩阵的和为：<br>
+<font size=5 color=red >S[x2, y2] - S[x1 - 1, y2] - S[x2, y1 - 1] + S[x1 - 1, y1 - 1]];</font></p>
+<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1642693304724.png" alt="" loading="lazy"></figure>
+<h1 id="例题">例题</h1>
+<p><font size =6  face="华文楷体" ><strong>1. 前缀和</strong></font><br>
+<font size =3><strong><a href="https://www.acwing.com/problem/content/797/">原题链接</a></strong></font><br>
+<strong>题意：</strong><br>
+输入一个长度为n的整数序列，输出第L个数到R个数的和</p>
+<h3 id="样例"><strong>样例</strong></h3>
+<p>输入：</p>
+<blockquote>
+<p>5 3<br>
+2 1 3 6 4<br>
+1 2<br>
+1 3<br>
+2 4</p>
+</blockquote>
+<p>输出：<br>
+<font color=red size=5>3</font><br>
+<font color=red size=5>6</font><br>
+<font color=red size=5>10</font></p>
+<h2 id="代码">代码</h2>
+<blockquote>
+<p>直接代一维前缀和模板</p>
+</blockquote>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,m,l,r,a[100005],s[100005]; 
+int main()
+{	
+	while(scanf(&quot;%d %d&quot;,&amp;n,&amp;m)!=EOF)
+	{
+		for(int i=1;i&lt;=n;i++)
+		{
+			scanf(&quot;%d&quot;,&amp;a[i]);
+			s[i]+=s[i-1]+a[i];
+		}
+		while(m--)
+		{
+			scanf(&quot;%d %d&quot;,&amp;l,&amp;r);
+			int t=s[r]-s[l-1];
+			printf(&quot;%d\n&quot;,t);
+		}
+	}
+	
+ }
+ 	
+</code></pre>
+<p><font size =6  face="华文楷体" ><strong>2. 子矩阵的和</strong></font><br>
+<font size =3><strong><a href="https://www.acwing.com/problem/content/798/">原题链接</a></strong></font><br>
+<strong>题意：</strong><br>
+输入一个n行m列的整数矩阵，输出以 x1,y1,x2,y2，为左上角坐标和右下角坐标的子矩阵的和</p>
+<h3 id="样例-2"><strong>样例</strong></h3>
+<p>输入：</p>
+<blockquote>
+<p>3 4 3<br>
+1 7 2 4<br>
+3 6 2 8<br>
+2 1 2 3<br>
+1 1 2 2<br>
+2 1 3 4<br>
+1 3 3 4</p>
+</blockquote>
+<p>输出：<br>
+<font color=red size=5>17</font><br>
+<font color=red size=5>27</font><br>
+<font color=red size=5>21</font></p>
+<h2 id="代码-2">代码</h2>
+<blockquote>
+<p>直接代二维前缀和模板</p>
+</blockquote>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,m,q,a[1005][1005],s[1005][1005];
+
+int main()
+{
+	scanf(&quot;%d %d %d&quot;,&amp;n, &amp;m, &amp;q);
+	for(int i = 1; i &lt;= n; i++ )
+		for( int j =1 ; j &lt;= m ; j++ )
+			{
+				scanf(&quot;%d&quot;,&amp;a[i][j]);
+				s[i][j] = a[i][j] + s[i-1][j] + s[i][j-1] - s[i-1][j-1];
+			}
+		while(q--)
+		{	int x1,x2,y1,y2;
+			scanf(&quot;%d %d %d %d&quot;,&amp;x1, &amp;y1, &amp;x2, &amp;y2);
+			int t= s[x2][y2] - s[x1-1][y2] - s[x2][y1-1] + s[x1-1][y1-1];
+			printf(&quot;%d\n&quot;,t);
+			
+		}return 0;	
+ } 
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://localhost:4000/tag/AaSpkgH2r/" class="tag">
+                    前缀和
+                  </a>
+                
+                  <a href="http://localhost:4000/tag/wA1FtrrQY/" class="tag">
+                    蓝桥杯
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-qi-er-fen-er/">
+                  <h3 class="post-title">
+                    备战蓝桥杯笔记（七）—二分（二）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

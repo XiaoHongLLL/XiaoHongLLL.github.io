@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>备战蓝桥杯笔记（三）—递归（二） | 小红的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1642738643847">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+带分数
+原题链接
+题意： 给定一个数N，问有多少组a,b,c 满足a+b/c=N，且在a,b,c中 1∼9 分别出现且只出现一次（不包含 0）输出总组数
+数据范围： 1~10^6
+样例1
+输入：100
+输出：11
+样例2
+输入：105
+输..." />
+    <meta name="keywords" content="递归,蓝桥杯" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://localhost:4000">
+        <img src="http://localhost:4000/images/avatar.png?v=1642738643847" class="site-logo">
+        <h1 class="site-title">小红的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      愿星河徜徉，一路有光
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">备战蓝桥杯笔记（三）—递归（二）</h2>
+            <div class="post-date">2021-12-19</div>
+            
+              <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/bei-zhan-lan-qiao-bi-ji-di-gui-er.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <!-- more -->
+<h1 id="带分数">带分数</h1>
+<p><a href="https://www.acwing.com/problem/content/description/1211/">原题链接</a><br>
+<strong>题意：</strong> 给定一个数N，问有多少组a,b,c 满足a+b/c=N，且在a,b,c中 1∼9 分别出现且只出现一次（不包含 0）输出总组数<br>
+<strong>数据范围：</strong> 1~10^6</p>
+<h2 id="样例1">样例1</h2>
+<p>输入：100<br>
+输出：11</p>
+<h2 id="样例2">样例2</h2>
+<p>输入：105<br>
+输出：6<br>
+<strong><font size=4>暴力法思路</font></strong></p>
+<ol>
+<li>用dfs枚举出全排列的每种情况</li>
+<li>把九位数用两重循环分解成三位数（分析题意得出，a一定小于10^6）</li>
+<li>判断分解的三位数是否满足条件 （判断是否满足条件的时候应用乘法式子，防止除法产生误差）</li>
+</ol>
+<h1 id="代码">代码</h1>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n;
+int st[10]/*每次的排列情况*/,num[10]/*记录每个数字的是否被用过*/,sum;
+int number(int l, int r)//把数组中的一段转化成数字 
+{
+  int res = 0;
+  for (int i = l; i &lt;= r; i++) 
+  {
+    res = res * 10 + st[i];
+  }
+  return res;
+}
+int dfs(int u)
+{	if(u&gt;9)
+	{	
+		//两重循环枚举 a,b,c的情况 
+		for (int i = 1; i &lt;= 6; i++)
+		{
+	        for (int j = i + 1; j &lt;= 9; j++)
+			{
+		          int a = number(1, i);
+		          int b = number(i + 1, j);
+		          int c = number(j + 1, 9);
+		          if (a * c + b == c * n)//判断是否满足条件 
+				  {	
+		            sum++;
+		          }
+	        }
+		}
+		
+	}
+	for(int i=1;i&lt;=9;i++)
+		{
+			if(num[i]==0)
+				{
+					st[u]=i;num[i]=1;
+					dfs(u+1);
+					st[u]=0;num[i]=0;
+				}
+		}
+	
+}
+int main()
+{	
+	while(scanf(&quot;%d&quot;,&amp;n)!=EOF)
+	{
+	sum=0;	
+	dfs(1);
+	printf(&quot;%d\n&quot;,sum); 	
+	}return 0;	
+}
+</code></pre>
+<hr>
+<p><strong><font size=4>y总的dfs嵌套法思路</font></strong></p>
+<ol>
+<li>搜索a的数字排列情况，即dfs_a,</li>
+<li>在dfs_a的每个叶子节点（即每个a的方案）下搜索c的数字排列情况dfs_c（c的方案）</li>
+<li>在c中检查是否满足条件b=c<em>n-a</em>c</li>
+</ol>
+<h1 id="代码-2">代码</h1>
+<pre><code>#include&lt;bits/stdc++.h&gt; 
+using namespace std;
+const int N=30;
+int n;
+bool st[N],backup[N];
+int ans;
+
+bool check(int a,int c)
+{
+    int b=c*n-a*c;
+    memcpy(backup,st,sizeof st);//把st数组复制到backup里面 
+    if(!a||!b||!c)//筛掉为0的情况 
+	return false;
+    while(b)
+	{
+        int x=b%10;//取个位
+        b/=10;//各位删掉
+        if(!x||backup[x])return false;//若该位数字为零，或者已经出现过，则false
+        backup[x]=true;//标记该个位数字出现
+    }
+    for(int i=1;i&lt;=9;i++)
+    	if(!backup[i])
+		return false;//检查1~9是否都各出现一次
+    return true;
+
+}
+
+
+void dfs_c(int u,int a,int c)
+{//u表示已经用了多少数，a表示a方案，c表示当前c
+    if(u==n)return;
+    if(check(a,c))ans++;
+    for(int i=1;i&lt;=9;i++)
+	{
+        if(!st[i])
+		{
+            st[i]=true;
+            dfs_c(u+1,a,c*10+i);//分支，c后加入i，更新c（c=c*10+i）
+            st[i]=false;//恢复现场
+    	}
+    }
+}
+
+void dfs_a(int u,int a)
+{//u表示1~9中已经用了多少数，a表示当前a
+    if(a&gt;=n)
+	return;//若a已大于n，则返回false
+    if(a)
+	dfs_c(u,a,0);//对a的叶子节点（即a的方案）嵌套c的dfs，枚举c的方案，并检查b
+    for(int i=1;i&lt;=9;i++)
+    {
+        if(!st[i])
+		{
+            st[i]=true;
+            dfs_a(u+1,a*10+i);//分支，a后加入i，更新a（a=a*10+i）
+            st[i]=false;//恢复现场
+        }
+    }
+}
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    dfs_a(0,0);//用了0个数，a此时为0
+    cout&lt;&lt;ans;
+    return 0;
+}
+
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://localhost:4000/tag/rJM3TCLdM/" class="tag">
+                    递归
+                  </a>
+                
+                  <a href="http://localhost:4000/tag/wA1FtrrQY/" class="tag">
+                    蓝桥杯
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-er-di-gui/">
+                  <h3 class="post-title">
+                    备战蓝桥杯笔记（二）——递归（一）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

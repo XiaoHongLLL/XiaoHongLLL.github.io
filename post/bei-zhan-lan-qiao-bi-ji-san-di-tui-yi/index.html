@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>备战蓝桥杯笔记（四）—递推（一） | 小红的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1642738643847">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+费解的开关
+原题链接
+题意：
+给你一个5*5的数据，1表示亮灯，0表示没亮，判断能否在6步之内使所有灯都变亮（包括6步）
+**数据范围：**n: 0~500
+样例
+输入：
+3
+00111
+01011
+10001
+11010
+11100
+
+..." />
+    <meta name="keywords" content="递推,蓝桥杯" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://localhost:4000">
+        <img src="http://localhost:4000/images/avatar.png?v=1642738643847" class="site-logo">
+        <h1 class="site-title">小红的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      愿星河徜徉，一路有光
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">备战蓝桥杯笔记（四）—递推（一）</h2>
+            <div class="post-date">2021-12-20</div>
+            
+              <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/bei-zhan-lan-qiao-bi-ji-san-di-tui-yi.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <!-- more -->
+<h1 id="费解的开关">费解的开关</h1>
+<p><a href="https://www.acwing.com/problem/content/description/97/">原题链接</a><br>
+<strong>题意：</strong><br>
+给你一个5*5的数据，1表示亮灯，0表示没亮，判断能否在6步之内使所有灯都变亮（包括6步）<br>
+**数据范围：**n: 0~500</p>
+<h2 id="样例">样例</h2>
+<p>输入：</p>
+<pre><code>3
+00111
+01011
+10001
+11010
+11100
+
+11101
+11101
+11110
+11111
+11111
+
+01111
+11111
+11111
+11111
+11111
+</code></pre>
+<p>输出：</p>
+<blockquote>
+<p>3<br>
+2<br>
+-1</p>
+</blockquote>
+<p><strong><font size=4>思路</font></strong></p>
+<ol>
+<li>枚举第一行的每种按灯情况，一共2^5种，</li>
+<li>在按第一行的方案的情况下，根据前一行的情况来按下一行的灯，直到n-1行</li>
+<li>判断第n行的每个灯是不是都是亮的，是的话就记录次数.</li>
+<li>定义一个变量来比较每种满足条件的情况下的次数，取最小的</li>
+</ol>
+<h1 id="代码">代码</h1>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+/*枚举第一行的各种按灯情况，用二进制表示
+比如k=1，即00001，表示按最后一个灯 
+*/ 
+using namespace std;
+char g[10][10];
+int turn(int x,int y)//每次按灯之后数组都会改变 
+{	//亮变不亮，不亮变亮，即1变0，0变1 
+	int dx[5] = {0, -1, 1, 0, 0}, dy[5] = {0, 0, 0, -1, 1};//中，左，右，下，上 
+    for (int i = 0; i &lt; 5; i ++ ) 
+	{
+        int a = x + dx[i], b = y + dy[i];
+        if (a &gt;= 0 &amp;&amp; a &lt; 5 &amp;&amp; b &gt;= 0 &amp;&amp; b &lt; 5) 
+		{	//^异或符号，表示是相同就为0，不同就为1 
+            g[a][b] ^= 1;//亮变不亮，不亮变亮，即1变0，0变1 
+        }
+    }
+} 
+int work()
+{	int res=100000;
+	//枚举第一行的2^5种情况
+	for(int k=0;k&lt;32;k++)
+		{
+			int sum=0;
+			char backup[10][10];
+    		memcpy(backup, g, sizeof g);//用backup备份g
+			for (int i = 0; i &lt; 5; i ++ ) 
+	            if (k &gt;&gt; i &amp; 1)//判断k右移i位之后是不是1 
+				{
+	                turn(0, i);
+	                sum ++ ;
+	            }
+		 
+			//从第2行到第4行，进行由前一行改变后一行的操作
+			for(int i=0;i&lt;4;i++)//从第一行开始，由第一行的状态判断 
+				{
+					for(int j=0;j&lt;5;j++)
+						if(g[i][j]=='0')
+							{//如果前一行没亮，则按下一行对应的灯 
+							turn(i+1,j);
+							sum++;
+							}
+				}
+			//判断最后一行的状态
+			int flag=1;
+			for(int i=0;i&lt;5;i++)
+				if(g[4][i]=='0')
+					{
+						flag=0;
+						break;				
+					}
+			if(flag)
+				res = min(res,sum);
+			memcpy(g, backup, sizeof g); //备份，使g数组变为最开始第一行未操作的状态	
+		}
+		if(res&lt;=6)
+		return res;
+		return -1; 
+}
+int main()
+{
+	int t;
+	scanf(&quot;%d&quot;,&amp;t);
+	while(t--)
+	{
+		for(int i=0;i&lt;5;i++)
+			scanf(&quot;%s&quot;,g[i]);
+		printf(&quot;%d\n&quot;,work());	
+			
+	}
+} 
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://localhost:4000/tag/4tlFr0dj5/" class="tag">
+                    递推
+                  </a>
+                
+                  <a href="http://localhost:4000/tag/wA1FtrrQY/" class="tag">
+                    蓝桥杯
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://localhost:4000/post/bei-zhan-lan-qiao-bi-ji-di-gui-er/">
+                  <h3 class="post-title">
+                    备战蓝桥杯笔记（三）—递归（二）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

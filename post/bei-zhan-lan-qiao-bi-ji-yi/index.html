@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>备战蓝桥笔记（一）——时间复杂度 | 小红的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1642738643847">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="根据题目给定的数据范围反推时间复杂度和算法
+
+作者：yxc
+文章链接
+来源：AcWing
+用这种反推的方式可以避免出现超时，也可以很快找到题目切入点🌞
+平时做题的时候也可以估计一下自己的时间复杂度，粗略判断是否会超时🌞
+一般ACM或者笔..." />
+    <meta name="keywords" content="蓝桥杯,算法" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://localhost:4000">
+        <img src="http://localhost:4000/images/avatar.png?v=1642738643847" class="site-logo">
+        <h1 class="site-title">小红的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      愿星河徜徉，一路有光
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">备战蓝桥笔记（一）——时间复杂度</h2>
+            <div class="post-date">2021-12-15</div>
+            
+              <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/bei-zhan-lan-qiao-bi-ji-yi.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p><strong>根据题目给定的数据范围反推时间复杂度和算法</strong></p>
+<!-- more -->
+<p><strong>作者：yxc</strong><br>
+<strong><a href="https://www.acwing.com/blog/content/32/">文章链接</a></strong><br>
+<strong>来源：AcWing</strong></p>
+<p>用这种反推的方式可以避免出现超时，也可以很快找到题目切入点🌞<br>
+平时做题的时候也可以估计一下自己的时间复杂度，粗略判断是否会超时🌞</p>
+<p>一般ACM或者笔试题的时间限制是1秒或2秒。<br>
+在这种情况下，C++代码中的操作次数控制在 10^7 ∼ 10^8 为最佳。</p>
+<p>下面给出在不同数据范围下，代码的时间复杂度和算法该如何选择：</p>
+<ol>
+<li>n≤30,<br>
+🌝指数级别, dfs+剪枝，状态压缩dp</li>
+<li>n≤100 =&gt; O(n^3)，<br>
+🌝floyd，dp，高斯消元</li>
+<li>n≤1000 =&gt; O(n^2)  ，O(n^2logn)，<br>
+🌝dp，二分，朴素版Dijkstra、朴素版Prim、Bellman-Ford</li>
+<li>n≤10000 =&gt; O(n∗n√n)，<br>
+🌝块状链表、分块、莫队</li>
+<li>n≤100000 =&gt; O(nlogn)<br>
+🌝各种sort，线段树、树状数组、set/map 、heap、拓扑排序、dijkstra+heap、prim+heap<br>
+🌝Kruskal、spfa、求凸包、求半平面交、二分、CDQ分治、整体二分、后缀数组、树链剖分、<br>
+🌝动态树</li>
+<li>n≤1000000 =&gt; O(n), 以及常数较小的 O(nlogn)算法 =&gt;<br>
+🌝单调队列、 hash、双指针扫描、并查集，kmp、AC自动机，<br>
+🌝常数比较小的 O(nlogn)的做法：sort、树状数组、heap、dijkstra、spfa</li>
+<li>n≤10000000=&gt; O(n)，<br>
+🌝双指针扫描、kmp、AC自动机、线性筛素数</li>
+<li>n≤10^9=&gt; O(√n))，<br>
+🌝判断质数</li>
+<li>n≤10^18 =&gt; O(logn),<br>
+🌝最大公约数，快速幂，数位DP</li>
+<li>n≤10^1000 =&gt; O((logn)^2)，<br>
+🌝高精度加减乘除</li>
+<li>n≤10^100000 =&gt; O(logk×loglogk),<br>
+🌝k表示位数，高精度加减、FFT/NTT</li>
+</ol>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://localhost:4000/tag/wA1FtrrQY/" class="tag">
+                    蓝桥杯
+                  </a>
+                
+                  <a href="http://localhost:4000/tag/o9znqPmZ8J/" class="tag">
+                    算法
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://localhost:4000/post/bo-ke-wen-zhang-xiao-ji-qiao-markdown-yu-fa/">
+                  <h3 class="post-title">
+                    博客文章小技巧—Markdown语法
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>备战蓝桥杯笔记（六）—二分（一） | 小红的博客</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1642738643847">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="介绍二分的模板以及如何运用
+
+整数二分
+参考文章链接
+作者：yxc
+
+代码
+bool check(int x) {/* ... */} // 检查x是否满足某种性质
+
+int left(int l, int r)
+{
+    //求满足条件..." />
+    <meta name="keywords" content="二分,蓝桥杯" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://localhost:4000">
+        <img src="http://localhost:4000/images/avatar.png?v=1642738643847" class="site-logo">
+        <h1 class="site-title">小红的博客</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      愿星河徜徉，一路有光
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">备战蓝桥杯笔记（六）—二分（一）</h2>
+            <div class="post-date">2021-12-29</div>
+            
+              <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/bei-zhan-lan-qiao-bei-bi-ji-liu-er-fen.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p><strong>介绍二分的模板以及如何运用</strong></p>
+<!-- more -->
+<h1 id="整数二分">整数二分</h1>
+<p><a href="https://www.acwing.com/blog/content/277/">参考文章链接</a><br>
+<strong>作者：yxc</strong><br>
+<img src="http://localhost:4000/post-images/1640781250075.png" alt="" loading="lazy"></p>
+<h2 id="代码">代码</h2>
+<pre><code>bool check(int x) {/* ... */} // 检查x是否满足某种性质
+
+int left(int l, int r)
+{
+    //求满足条件的左端点
+        while (l &lt; r)
+    {
+        int mid = (l + r / 2 );
+        if (check(mid)) r = mid;    // check()判断mid是否满足性质
+        else l = mid + 1;
+    }
+    return l;
+}
+// 求满足条件的右端点
+int right(int l, int r)
+{
+    while (l &lt; r)
+    {
+        int mid = l + r + 1 &gt;&gt; 1;
+        if (check(mid)) l = mid;
+        else r = mid - 1;
+    }
+    return l;
+}
+
+</code></pre>
+<h2 id="例题">例题</h2>
+<p><strong>题意：</strong><br>
+给你一个递增的数组长度为n，q次查询，对于每次查询，返回k的起始位置和终止位置<br>
+（位置从0开始），如果不存在k,则返回-1，-1<br>
+<strong><font color=Blue>数据范围</font></strong><br>
+1&lt;=n&lt;=100000<br>
+1&lt;=q&lt;=10000<br>
+1&lt;=k&lt;=10000</p>
+<h2 id="样例">样例</h2>
+<p>输入：</p>
+<blockquote>
+<p>6 3<br>
+1 2 2 3 3 4<br>
+3<br>
+4<br>
+5</p>
+</blockquote>
+<p>输出：</p>
+<blockquote>
+<p>3 4<br>
+5 5<br>
+-1 -1</p>
+</blockquote>
+<p><strong><font size=4>思路</font></strong><br>
+由数据范围判断可以二分，直接使用二分模板找到满足条件的左端点及右端点即可<br>
+**注意：**找右端点时，数据的左边界应是满足条件的左端点</p>
+<h2 id="代码-2">代码</h2>
+<pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,q,k,m,num[100005];
+int main()
+{	while(scanf(&quot;%d %d&quot;,&amp;n,&amp;q)!=EOF)
+	{
+		for(int i=0;i&lt;n;i++)
+			scanf(&quot;%d&quot;,&amp;num[i]);
+		while(q--)
+		{	int flag=1;
+			scanf(&quot;%d&quot;,&amp;k);
+			int l=0,r=n-1;
+			while(l&lt;r)//左边界 
+			{	m=(l+r)/2;
+				if(num[m]&gt;=k)		
+					r=m;	
+				else l=m+1;
+			}
+			if(num[r]==k)
+				{printf(&quot;%d &quot;,r);
+				r=n-1;
+				while(l&lt;r)//右边界 
+				{	m=(l+r+1)/2;
+					if(num[m]&lt;=k)
+						{	
+						l=m;	
+						}
+					else r=m-1;
+				}
+				 
+				printf(&quot;%d\n&quot;,r);	
+				}
+			else 
+			printf(&quot;-1 -1\n&quot;);	 
+		}return 0;		
+	}
+ } 
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://localhost:4000/tag/Q5B87bOp1/" class="tag">
+                    二分
+                  </a>
+                
+                  <a href="http://localhost:4000/tag/wA1FtrrQY/" class="tag">
+                    蓝桥杯
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://localhost:4000/post/bei-zhan-lan-qiao-bei-bi-ji-si-di-tui-er/">
+                  <h3 class="post-title">
+                    备战蓝桥杯笔记（五）—递推（二）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
